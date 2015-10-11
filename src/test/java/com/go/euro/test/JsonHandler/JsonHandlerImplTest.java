@@ -1,5 +1,6 @@
 package com.go.euro.test.JsonHandler;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -27,7 +28,7 @@ public class JsonHandlerImplTest {
 		String actual = readFile("Berlin.csv");
 		String expected = readRecources("csvFiles/correct.csv");
 		Assert.assertEquals(expected, actual);
-
+		Assert.assertTrue("The file is not deleted", removeFile("Berlin.csv"));;
 	}
 
 	@Test
@@ -36,9 +37,12 @@ public class JsonHandlerImplTest {
 		JsonNode preparedNode = tester.validateAndTransformJsonToCorrectFormat(
 				JsonLoader.fromResource("/schemas/correctJsonWithNullValue.json"));
 		tester.createCsvFileFromJson(preparedNode, "Berlin");
+		
 		String actual = readFile("Berlin.csv");
 		String expected = readRecources("csvFiles/correctCsvWithNullValue.csv");
+		
 		Assert.assertEquals(expected, actual);
+		Assert.assertTrue("The file is not deleted", removeFile("Berlin.csv"));;
 	}
 
 	@Test
@@ -60,6 +64,12 @@ public class JsonHandlerImplTest {
 		return new String(encoded, ENCODING);
 	}
 
+	private boolean removeFile(String fileName){
+		File file = new File(fileName);	
+		Assert.assertTrue("The file "+fileName+" does not exist", file.exists());
+		return file.delete();
+
+	}
 	private String readRecources(String expectedcontentFileName)throws IOException {
 		String expectedContent = "";
 		try {
