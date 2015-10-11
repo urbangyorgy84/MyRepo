@@ -1,0 +1,18 @@
+[{
+	"_id": 376217,
+	"key": null,
+	"name": "Berlin",
+	"fullName": "Berlin, Germany",
+	"iata_airport_code": null,
+	"type": "location",
+	"country": "Germany",
+	"geo_position": {
+		"latitude": null,
+		"longitude": null
+	},
+	"locationId": 8384,
+	"inEurope": true,
+	"countryCode": "DE",
+	"coreCountry": true,
+	"distance": null
+}]

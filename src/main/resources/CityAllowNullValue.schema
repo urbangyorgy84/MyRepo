@@ -1,0 +1,59 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "City set",
+	"type": "array",
+	"items": {
+		"title": "City",
+		"type": "object",
+		"properties": {
+			"_id": {
+				"anyOf": [{
+					"type": "number"
+				},
+				{
+					"type": "null"
+				}]
+			},
+			"name": {
+				"anyOf": [{
+					"type": "string"
+				},
+				{
+					"type": "null"
+				}]
+			},
+			"type": {
+				"anyOf": [{
+					"type": "string"
+				},
+				{
+					"type": "null"
+				}]
+			},
+			"geo_position": {
+				"type": "object",
+				"properties": {
+					"latitude": {
+						"anyOf": [{
+							"type": "number"
+						},
+						{
+							"type": "null"
+						}]
+					},
+					"longitude": {
+						"anyOf": [{
+							"type": "number"
+						},
+						{
+							"type": "null"
+						}]
+					}
+				},
+				"required": ["latitude","longitude"]
+			}
+		},
+		"required": ["_id","name","type","geo_position"]
+	},
+	"minItems": 1
+}
