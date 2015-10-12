@@ -24,7 +24,11 @@ public class GoEuroTest
     	String city =args[0] ;
     	
     	JsonNode jsonResponse = client.getJsonFromUri(city);
-    	ArrayNode alignedNodes = jsonHandler.validateAndTransformJsonToCorrectFormat(jsonResponse);
-    	jsonHandler.createCsvFileFromJson(alignedNodes, city);
+    	if(jsonResponse != null){
+        	ArrayNode alignedNodes = jsonHandler.validateAndTransformJsonToCorrectFormat(jsonResponse);
+        	if(alignedNodes != null){
+            	jsonHandler.createCsvFileFromJson(alignedNodes, city);
+        	}
+    	}
     }
 }

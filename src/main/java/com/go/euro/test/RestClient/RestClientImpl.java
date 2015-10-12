@@ -36,12 +36,17 @@ public class RestClientImpl implements RestClient {
 		} catch (Exception e) {
 	    	LOGGER.error("Error during the request!: ", e);
 		}
-	    return createJsonFromString(responseMsg);
+	    if(responseMsg != null && !responseMsg.isEmpty() && !"[]".equals(responseMsg)){
+		    return createJsonFromString(responseMsg);
+	    }else{
+	    	LOGGER.error("The requested City is not exist in the database");
+	    	return null;
+	    }
 	}
 
 	protected JsonNode createJsonFromString (String jsonStr) {
 		if(jsonStr.isEmpty()){
-	    	LOGGER.error("Given Json cannot be null!");
+	    	LOGGER.error("Given Json cannot be empty string!");
 	    	return null;	
 		}
 		ObjectMapper mapper = new ObjectMapper();
