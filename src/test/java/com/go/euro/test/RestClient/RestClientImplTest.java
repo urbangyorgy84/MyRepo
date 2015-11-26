@@ -6,18 +6,18 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import com.github.fge.jackson.JsonLoader;
+import com.go.euro.test.Utility.UtilityTest;
 
 public class RestClientImplTest {
 
 	@Test
 	public void testRestClientImpl() throws IOException{
-		RestClientTester tester= new RestClientTester(readRecources("schemas/correctJson.json"));
+		RestClientTester tester= new RestClientTester(UtilityTest.readRecources("schemas/correctJson.json"));
 		String actual = tester.getJsonFromUri("Belrin").toString();
 		String expected = JsonLoader.fromResource("/schemas/correctJson.json").toString();
 		Assert.assertEquals(expected, actual);;
@@ -37,17 +37,5 @@ public class RestClientImplTest {
 					mockedWebTarget);
 			client = mockedClient;
 		}
-	}
-
-	private String readRecources(String expectedcontentFileName)
-			throws IOException {
-		String expectedContent = "";
-		try {
-			expectedContent = IOUtils.toString(getClass().getClassLoader()
-					.getResourceAsStream(expectedcontentFileName));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return expectedContent;
 	}
 }
